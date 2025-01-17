@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            background-color: #8B4513;
+            color: white;
+            padding: 11px;
+            text-align: center;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product img {
+            max-width: 100%;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .product h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #8B4513;
+        }
+        .product p {
+            font-size: 14px;
+            color: #555;
+        }
+        .product a {
+            display: block;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #25D366; /* WhatsApp green */
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .product a:hover {
+            background-color: #1DA851;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 id="categoryTitle">Category</h1> <!-- Category title -->
+    </header>
+
+    <div class="product-list" id="productList">
+        <!-- Products will be dynamically loaded here -->
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+
+        const products = {
+            vasakal: [
+                { name: "Vasakal Design 1", image: "vs 2.jpg", description: "Intricately carved wooden vasakal." },
+                { name: "Vasakal Design 2", image: "vs 3.jpg", description: "Elegant wooden vasakal design." },
+                { name: "Vasakal Design 3", image: "vs 4.jpg", description: "Stylish and durable wooden vasakal." },
+                { name: "Vasakal Design 4", image: "vs 5.jpg", description: "Intricately carved wooden vasakal." },
+                { name: "Vasakal Design 5", image: "vs 6.jpg", description: "Elegant wooden vasakal design." },
+                { name: "Vasakal Design 6", image: "vs 7.jpg", description: "Stylish and durable wooden vasakal." },
+                { name: "Vasakal Design 7", image: "vs 8.jpg", description: "Intricately carved wooden vasakal." },
+                { name: "Vasakal Design 8", image: "vs 9.jpg", description: "Elegant wooden vasakal design." },
+                { name: "Vasakal Design 9", image: "vs 10.jpg", description: "Stylish and durable wooden vasakal." },
+                { name: "Vasakal Design 10", image: "vs 11.jpg", description: "Intricately carved wooden vasakal." },
+                { name: "Vasakal Design 11", image: "vs 12.jpg", description: "Elegant wooden vasakal design." },
+                { name: "Vasakal Design 12", image: "vs 13.jpg", description: "Stylish and durable wooden vasakal." },
+                { name: "Vasakal Design 13", image: "vs 14.jpg", description: "Intricately carved wooden vasakal." },
+                { name: "Vasakal Design 14", image: "vs 15.jpg", description: "Elegant wooden vasakal design." },
+                { name: "Vasakal Design 15", image: "vs 16.jpg", description: "Stylish and durable wooden vasakal." },
+                { name: "Vasakal Design 16", image: "vs 17.jpg", description: "Intricately carved wooden vasakal." }
+            ],
+            MainDoor: [
+                { name: "Main Door 1", image: "dd 1.jpg", description: "Beautiful main door design." },
+                { name: "Main Door 2", image: "dd 2.jpg", description: "Elegant main door with detailed carvings." },
+                { name: "Main Door 3", image: "dd 3.jpg", description: "A Majestic Entrance to Your Home." },
+            { name: "Main Door 4", image: "dd 4.jpg", description: "The Grand Entrance to Your Sanctuary." },
+            { name: "Main Door 5", image: "dd 5.jpg", description: "Step Into Luxury." },
+            { name: "Main Door 6", image: "dd 6.jpg", description: "Your Home’s First Statement." },
+            { name: "Main Door 7", image: "dd 7.jpg", description: "Timeless Beauty, Unmatched Strength." },
+            { name: "Main Door 8", image: "dd 8.jpg", description: "A Majestic Entrance to Your Home." },
+            { name: "Main Door 9", image: "dd 9.jpg", description: "Beautiful main door design." },
+            { name: "Main Door 10", image: "dd 10.jpg", description: "Elegant main door with detailed carvings." },
+            { name: "Main Door 11", image: "dd 11.jpg", description: "The Grand Entrance to Your Sanctuary." },
+            { name: "Main Door 12", image: "dd 12.jpg", description: "Step Into Luxury." },
+            { name: "Main Door 13", image: "dd 13.jpg", description: "Your Home’s First Statement." },
+            { name: "Main Door 14", image: "dd 14.jpg", description: "Timeless Beauty, Unmatched Strength." },
+            { name: "Main Door 15", image: "dd 15.jpg", description: "Beautiful main door design." },
+            { name: "Main Door 16", image: "dd 16.jpg", description: "Elegant main door with detailed carvings." },
+            { name: "Main Door 17", image: "dd 17.jpg", description: "Timeless Beauty, Unmatched Strength." },
+            { name: "Main Door 18", image: "dd 18.jpg", description: "Elegant main door with detailed carvings." },
+            { name: "Main Door 19", image: "dd 19.jpg", description: "Timeless Beauty, Unmatched Strength." }
+            ],
+            poojaroom: [
+                { name: "Pooja Room Design 1", image: "pj 1.jpg", description: "Sacred pooja room design." },
+                { name: "Pooja Room Design 2", image: "pj 2.jpg", description: "Elegant pooja room for your home." },
+                { name: "Pooja Room Design 3", image: "pj 3.jpg", description: "Calm and peaceful pooja space." },
+            { name: "Pooja Room Design 4", image: "pj 4.jpg", description: "Traditional pooja room design." },
+            { name: "Pooja Room Design 5", image: "pj 5.jpg", description: "Perfect pooja room for your spiritual needs." }
+            ],
+            kitchencupboard: [
+                { name: "Kitchen Cupboard 1", image: "kk 1.jpg", description: "Spacious wooden kitchen cupboard." },
+                { name: "Kitchen Cupboard 2", image: "kk 2.jpg", description: "Stylish kitchen cupboard for your home." },
+                { name: "Kitchen Cupboard 3", image: "kk 3.jpg", description: "Functional wooden kitchen cupboard." },
+            { name: "Kitchen Cupboard 4", image: "kk 4.jpg", description: "Elegant wooden cupboard for kitchens." },
+            { name: "Kitchen Cupboard 5", image: "kk 5.jpg", description: "Durable kitchen cupboard with ample storage." }
+            ],
+            bedroomcupboard: [
+                { name: "Bedroom Cupboard 1", image: "cc 1.jpg", description: "Beautiful wooden bedroom cupboard." },
+                { name: "Bedroom Cupboard 2", image: "cc 2.jpg", description: "Spacious bedroom cupboard for storage." },
+                { name: "Bedroom Cupboard 3", image: "cc 3.jpg", description: "Stylish wooden cupboard for your bedroom." },
+            { name: "Bedroom Cupboard 4", image: "cc 4.jpg", description: "Elegant bedroom cupboard for your space." },
+            { name: "Bedroom Cupboard 5", image: "cc 5.jpg", description: "Durable and spacious bedroom cupboard." }
+            ],
+        };
+
+        const productList = document.getElementById('productList');
+        const categoryTitle = document.getElementById('categoryTitle');
+
+        if (category && products[category]) {
+            // Set the header title to the category name
+            categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+
+            // Dynamically load the products for the selected category
+            products[category].forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <a href="https://wa.me/919940302699?text=Hi,%20I%20am%20interested%20in%20the%20product:%20${encodeURIComponent(product.name)}.%20Here%20is%20the%20image:%20${location.origin}/${product.image}" target="_blank">More Details</a>
+                `;
+                productList.appendChild(productDiv);
+            });
+        } else {
+            productList.innerHTML = "<p>No products found for this category.</p>";
+        }
+    </script>
+</body>
+</html>
